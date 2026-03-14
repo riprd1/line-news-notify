@@ -34,7 +34,7 @@ def get_latest_news():
     href = a.get("href", "")
     title = a.get_text(" ", strip=True)
 
-    match = re.search(r"/news/detail/(\\d+)", href)
+    match = re.search(r"/news/detail/(\d+)", href)
     if not match:
         raise RuntimeError(f"記事IDを取得できませんでした: {href}")
 
