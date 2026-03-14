@@ -5,6 +5,9 @@ on:
     - cron: "*/10 * * * *"
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
   run:
     runs-on: ubuntu-latest
@@ -22,3 +25,15 @@ jobs:
         env:
           LINE_CHANNEL_ACCESS_TOKEN: ${{ secrets.LINE_CHANNEL_ACCESS_TOKEN }}
           LINE_USER_ID: ${{ secrets.LINE_USER_ID }}
+
+      - name: Commit state file
+        run: |
+          if git diff --quiet; then
+            echo "No state change"
+          else
+            git config user.name "github-actions"
+            git config user.email "github-actions@github.com"
+            git add state.json
+            git commit -m "Update state.json"
+            git push
+          fi
