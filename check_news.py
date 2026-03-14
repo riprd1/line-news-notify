@@ -74,7 +74,7 @@ def main():
 
     last_id = state.get("last_id")
     if last_id != latest["id"]:
-        message = f"🔔 PRODUCE 101 NEWS更新\\n\\n{latest['title']}\\n\\n{latest['url']}"
+        message = f"🔔 PRODUCE 101 NEWS更新\n\n{latest['title']}\n\n{latest['url']}"
         send_line_message(message)
 
         state["last_id"] = latest["id"]
